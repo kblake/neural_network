@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require_relative '../lib/neural_network'
 
 neuronA = NeuralNetwork::Neuron.new
