@@ -1,8 +1,8 @@
-require "neural_network/version"
-require "neural_network/connection"
-require "neural_network/neuron"
-require "neural_network/layer"
-require "neural_network/network"
+require_relative "neural_network/version"
+require_relative "neural_network/connection"
+require_relative "neural_network/neuron"
+require_relative "neural_network/layer"
+require_relative "neural_network/network"
 
 
 
