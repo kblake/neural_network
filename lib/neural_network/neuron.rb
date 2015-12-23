@@ -1,7 +1,6 @@
 module NeuralNetwork
   class Neuron
-    attr_accessor :input
-    attr_reader :output, :incoming, :outgoing
+    attr_accessor :input, :outgoing, :output, :incoming
 
     def initialize
       @incoming = []
