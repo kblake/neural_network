@@ -1,6 +1,6 @@
 module NeuralNetwork
   class Connection
-    attr_reader :source, :weight
+    attr_reader :source, :target, :weight
 
     def initialize(source, target)
       @source = source # neuron
