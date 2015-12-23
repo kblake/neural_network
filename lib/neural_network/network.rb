@@ -2,10 +2,10 @@ module NeuralNetwork
   class Network
     attr_accessor :input_layer, :output_layer, :hidden_layers
 
-    def initialize(sizes)
-      @input_layer    = Layer.new(sizes.shift)
-      @output_layer   = Layer.new(sizes.pop)
-      @hidden_layers  = sizes.map{|s| Layer.new(s)}
+    def initialize(layer_sizes)
+      @input_layer    = Layer.new(layer_sizes.shift)
+      @output_layer   = Layer.new(layer_sizes.pop)
+      @hidden_layers  = layer_sizes.map{|layer_size| Layer.new(layer_size)}
 
       connect_layers
     end
