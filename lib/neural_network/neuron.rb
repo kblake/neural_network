@@ -41,11 +41,7 @@ module NeuralNetwork
         end
       end
 
-      # update weights - Learning!!
-      @outgoing.each do |connection|
-        gradient = output * connection.target.delta
-        connection.weight -= gradient * LEARNING_RATE
-      end
+      update_weights
     end
 
     def bias?
@@ -56,6 +52,13 @@ module NeuralNetwork
 
     def output?
       @outgoing.empty?
+    end
+
+    def update_weights
+      @outgoing.each do |connection|
+        gradient = output * connection.target.delta
+        connection.weight -= gradient * LEARNING_RATE
+      end
     end
   end
 

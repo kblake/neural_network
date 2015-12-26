@@ -52,4 +52,8 @@ describe NeuralNetwork::Neuron do
       expect(NeuralNetwork::BiasNeuron.new.bias?).to be_truthy
     end
   end
+
+  context "training" do
+
+  end
 end
