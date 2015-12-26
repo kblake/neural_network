@@ -8,10 +8,6 @@ describe NeuralNetwork::Neuron do
     expect(neuron.outgoing).to be_empty
   end
 
-  it "#activation_function" do
-    expect(neuron.activation_function(1)).to eq 0.7310585786300049
-  end
-
   context "#activate" do
     it "generates proper output" do
       neuron.activate(1)
@@ -45,5 +41,15 @@ describe NeuralNetwork::Neuron do
     neuronA.connect(neuronB)
     expect(neuronA.outgoing.length).to eq 2
     expect(neuronB.incoming.length).to eq 2
+  end
+
+  context "bias neuron" do
+    it "not a bias" do
+      expect(neuron).to_not be_bias
+    end
+
+    it "create" do
+      expect(NeuralNetwork::BiasNeuron.new.bias?).to be_truthy
+    end
   end
 end

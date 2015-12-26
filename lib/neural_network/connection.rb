@@ -1,11 +1,11 @@
 module NeuralNetwork
   class Connection
-    attr_reader :source, :target, :weight
+    attr_accessor :source, :target, :weight
 
     def initialize(source, target)
       @source = source # neuron
       @target = target # neuron
-      @weight = rand
+      @weight = 0.4 # rand
     end
 
     def to_s

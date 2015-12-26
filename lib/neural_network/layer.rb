@@ -7,6 +7,10 @@ module NeuralNetwork
     end
 
     def connect(target_layer)
+      unless @neurons.any? {|neuron| neuron.bias? }
+        @neurons << NeuralNetwork::BiasNeuron.new
+      end
+
       @neurons.each do |source_neuron|
         target_layer.neurons.each do |target_neuron|
           source_neuron.connect(target_neuron)
