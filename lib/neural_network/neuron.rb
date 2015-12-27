@@ -30,15 +30,11 @@ module NeuralNetwork
     end
 
     def train(target_output = nil)
-      input_derivative = Activate.activation_prime(@input)
-
       if output?
         @error = target_output - @output
         @delta = -@error * input_derivative
       else
-        @delta = @outgoing.reduce(0) do |sum, connection|
-          sum + input_derivative * connection.weight * connection.target.delta
-        end
+        calculate_outgoing_delta
       end
 
       update_weights
@@ -52,6 +48,16 @@ module NeuralNetwork
 
     def output?
       @outgoing.empty?
+    end
+
+    def input_derivative
+      Activate.activation_prime(@input)
+    end
+
+    def calculate_outgoing_delta
+      @delta = @outgoing.reduce(0) do |sum, connection|
+        sum + input_derivative * connection.weight * connection.target.delta
+      end
     end
 
     def update_weights
