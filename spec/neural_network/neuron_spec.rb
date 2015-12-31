@@ -54,21 +54,25 @@ describe NeuralNetwork::Neuron do
   end
 
   context "training" do
-    #neuronA = NeuralNetwork::Neuron.new
-    #neuronB = NeuralNetwork::Neuron.new
+    it "error rate should get smaller" do
+      neuronA = NeuralNetwork::Neuron.new
+      neuronB = NeuralNetwork::Neuron.new
 
-    #neuronA.connect(neuronB)
+      neuronA.connect(neuronB)
 
-    #10000.times do |n|
-      #neuronA.activate(2)
-      #neuronB.activate
+      old_error = 1000
 
-      #neuronB.train(1)
-      #neuronA.train
+      100.times do |n|
+        neuronA.activate(2)
+        neuronB.activate
 
-      #if n == 0 || n % 1000 == 0
-        #puts "epoch: #{n} error: #{neuronB.error}"
-      #end
-    #end
+        neuronB.train(1)
+        neuronA.train
+
+        expect(neuronB.error < old_error).to be_truthy
+      end
+
+    end
+
   end
 end
