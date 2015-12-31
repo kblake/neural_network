@@ -9,8 +9,8 @@ describe NeuralNetwork::Network do
 
     let(:network)     { described_class.new layer_sizes.dup }
 
-    it "create input layer" do
-      expect(network.input_layer.neurons.size).to eq input_size
+    it "create input layer with neurons + bias neuron" do
+      expect(network.input_layer.neurons.size).to eq input_size + 1 # +1 for bias neuron
     end
 
     it "create output layer" do

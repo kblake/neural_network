@@ -34,11 +34,11 @@ describe NeuralNetwork::Layer do
       end
     end
 
-    it "output layer's incoming neurons are stored" do
+    it "output layer's incoming neurons + bias neuron are stored" do
       input_layer.connect(output_layer)
 
       output_layer.neurons.each do |neuron|
-        expect(neuron.incoming.size).to eq 2
+        expect(neuron.incoming.size).to eq 3
         expect(neuron.incoming.map(&:source)).to eq input_layer.neurons
         expect(neuron.outgoing.size).to eq 0
       end
