@@ -10,12 +10,26 @@ module NeuralNetwork
       connect_layers
     end
 
-
-    def activate(inputValues)
-      @input_layer.activate(inputValues)
-      @hidden_layers.each {|hidden_layer| hidden_layer.activate }
+    def activate(input_values)
+      @input_layer.activate(input_values)
+      @hidden_layers.each(&:activate)
       @output_layer.activate
     end
+
+    def train(target_outputs)
+      # all layers in reverse, back propogate!!
+      @output_layer.train(target_outputs)
+      @hidden_layers.reverse.each(&:train)
+      @input_layer.train
+    end
+
+    #def errorFn(target_outputs)
+      #index = -1
+      #output_layer.neurons.reduce(0) do |sum, neuron|
+        #index = index + 1
+        #sum + 0.5 * (target_outputs[index] ** 2)
+      #end
+    #end
 
     private
 

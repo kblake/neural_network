@@ -24,6 +24,16 @@ module NeuralNetwork
       @neurons.each_with_index do |neuron, index|
         neuron.activate(values[index])
       end
+
+      # optional: return mapping of neuron outputs
+      @neurons.map { |n| n.output }
+    end
+
+
+    def train(target_outputs = [])
+      @neurons.each_with_index do |neuron, index|
+        neuron.train(target_outputs[index])
+      end
     end
   end
 end

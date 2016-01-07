@@ -2,6 +2,9 @@
 
 require_relative '../lib/neural_network'
 
+# why do I need this??
+require_relative '../lib/neural_network/trainer'
+
 #neuronA = NeuralNetwork::Neuron.new
 #neuronB = NeuralNetwork::Neuron.new
 
@@ -76,24 +79,34 @@ require_relative '../lib/neural_network'
 #end
 
 
-neuronA = NeuralNetwork::Neuron.new
-neuronB = NeuralNetwork::Neuron.new
+#neuronA = NeuralNetwork::Neuron.new
+#neuronB = NeuralNetwork::Neuron.new
 
-neuronA.connect(neuronB)
+#neuronA.connect(neuronB)
 
-10000.times do |n|
-  neuronA.activate(2)
-  neuronB.activate
+DATA = {
+  orgate: [
+    {input: [0,0], output: [0]},
+    {input: [0,1], output: [1]},
+    {input: [1,0], output: [1]},
+    {input: [1,1], output: [1]}
+  ]
+}
+network = NeuralNetwork::Network.new([2,1])
+trainer = NeuralNetwork::Trainer.new(network, DATA[:orgate])
+trainer.train({epochs: 10000, log_freqs: 1000})
 
-  #puts "A out: #{neuronA.output}"
-  #puts "B out: #{neuronB.output}"
+#10000.times do |n|
+  #neuronA.activate(2)
+  #neuronB.activate
 
-  neuronB.train(1)
-  neuronA.train
+  ##puts "A out: #{neuronA.output}"
+  ##puts "B out: #{neuronB.output}"
 
-  if n == 0 || n % 1000 == 0
-    puts "epoch: #{n} error: #{neuronB.error}"
-  end
-  #puts "A error/delta: #{neuronA.error}/#{neuronA.delta}"
-  #puts "B error/delta: #{neuronB.error}/#{neuronB.delta}"
-end
+  #neuronB.train(1)
+  #neuronA.train
+
+  #if n == 0 || n % 1000 == 0
+    #puts "epoch: #{n} delta: #{neuronB.delta}"
+  #end
+#end
