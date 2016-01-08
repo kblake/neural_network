@@ -1,5 +1,3 @@
-require_relative 'activate'
-
 module NeuralNetwork
   class Neuron
     attr_accessor :input, :outgoing, :output, :incoming, :delta

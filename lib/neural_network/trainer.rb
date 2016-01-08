@@ -3,22 +3,23 @@ module NeuralNetwork
     attr_accessor :network, :data
 
     def initialize(network, data)
-      @network = network
-      @data = data
+      @network  = network
+      @data     = data
     end
 
     def train(options = {})
-      epochs = options[:epochs]
+      epochs    = options[:epochs]
       log_freqs = options[:log_freqs]
 
       epochs.times do |epoch|
-        data.each do |sample|
+        average_error = data.reduce(0) do |sum, sample|
           network.activate(sample[:input])
           network.train(sample[:output])
-          if epoch == 0 || epoch % 1000 == 0
-          #if epoch == epochs - 1
-            puts "ACTUAL: #{network.activate(sample[:input])}   TARGET: #{sample[:output]}"
-          end
+          sum + network.error/data.length
+        end
+
+        if epoch % log_freqs == 0 || epoch + 1 == epochs
+          puts "epoch: #{epoch}  error: #{average_error}"
         end
       end
     end
