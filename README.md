@@ -20,7 +20,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Run the trainer using OR GATE data
+
+    $ ./app/run.rb
+
+Run specs
+
+    $ rake
+
 
 ## Development
 
