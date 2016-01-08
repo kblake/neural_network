@@ -54,13 +54,13 @@ describe NeuralNetwork::Neuron do
   end
 
   context "training" do
-    it "error rate should get smaller" do
+    it "delta should get smaller" do
       neuronA = NeuralNetwork::Neuron.new
       neuronB = NeuralNetwork::Neuron.new
 
       neuronA.connect(neuronB)
 
-      old_error = 1000
+      old_delta = 1000
 
       100.times do |n|
         neuronA.activate(2)
@@ -69,7 +69,7 @@ describe NeuralNetwork::Neuron do
         neuronB.train(1)
         neuronA.train
 
-        expect(neuronB.error < old_error).to be_truthy
+        expect(neuronB.delta < old_delta).to be_truthy
       end
 
     end
