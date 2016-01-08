@@ -2,8 +2,7 @@ require_relative 'activate'
 
 module NeuralNetwork
   class Neuron
-    # remove :error
-    attr_accessor :input, :outgoing, :output, :incoming, :error, :delta
+    attr_accessor :input, :outgoing, :output, :incoming, :delta
 
     # make this a variable in the future
     # to be configurable
@@ -12,7 +11,6 @@ module NeuralNetwork
     def initialize
       @incoming = []
       @outgoing = []
-      #@delta = 0
     end
 
     def activate(value = nil)
@@ -22,7 +20,7 @@ module NeuralNetwork
         sum + connection.source.output * connection.weight
       end
 
-      @output = Activate.activation_function(input)
+      @output = activation_function(input)
     end
 
     def connect(target)
@@ -36,12 +34,8 @@ module NeuralNetwork
     end
 
     def train(target_output = nil)
-      #if bias? && input?
-
+      if !bias? && !input?
         if output?
-          #@error = target_output - @output
-          #@delta = -@error * input_derivative
-
           # this is the derivative of the error function
           # not simply difference in output
           # http://whiteboard.ping.se/MachineLearning/BackProp
@@ -49,7 +43,7 @@ module NeuralNetwork
         else
           calculate_outgoing_delta
         end
-      #end
+      end
 
       update_weights
     end
@@ -64,11 +58,6 @@ module NeuralNetwork
       @outgoing.empty?
     end
 
-    #def input_derivative
-      # DELETE #activation_prime method
-      #Activate.activation_prime(@input)
-    #end
-
     def calculate_outgoing_delta
       @delta = @outgoing.reduce(0) do |sum, connection|
         sum + connection.weight * connection.target.delta
@@ -80,6 +69,10 @@ module NeuralNetwork
         gradient = output * connection.target.delta
         connection.weight -= gradient * LEARNING_RATE
       end
+    end
+
+    def activation_function(input)
+      1 / (1+ Math.exp(-input))
     end
   end
 

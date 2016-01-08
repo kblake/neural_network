@@ -92,21 +92,7 @@ DATA = {
     {input: [1,1], output: [1]}
   ]
 }
+
 network = NeuralNetwork::Network.new([2,1])
 trainer = NeuralNetwork::Trainer.new(network, DATA[:orgate])
 trainer.train({epochs: 10000, log_freqs: 1000})
-
-#10000.times do |n|
-  #neuronA.activate(2)
-  #neuronB.activate
-
-  ##puts "A out: #{neuronA.output}"
-  ##puts "B out: #{neuronB.output}"
-
-  #neuronB.train(1)
-  #neuronA.train
-
-  #if n == 0 || n % 1000 == 0
-    #puts "epoch: #{n} delta: #{neuronB.delta}"
-  #end
-#end
