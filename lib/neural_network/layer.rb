@@ -11,8 +11,9 @@ module NeuralNetwork
         @neurons << NeuralNetwork::BiasNeuron.new
       end
 
-      @neurons.each do |source_neuron|
-        target_layer.neurons.each do |target_neuron|
+      @neurons
+        .product(target_layer.neurons)
+        .each do |source_neuron, target_neuron|
           source_neuron.connect(target_neuron)
         end
       end
