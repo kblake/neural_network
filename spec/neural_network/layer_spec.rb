@@ -40,6 +40,7 @@ describe NeuralNetwork::Layer do
       output_layer.neurons.each do |neuron|
         expect(neuron.incoming.size).to eq 3
         expect(neuron.incoming.map(&:source)).to eq input_layer.neurons
+        expect(neuron.incoming.map(&:source).any?(&:bias?)).to be_truthy
         expect(neuron.outgoing.size).to eq 0
       end
     end
