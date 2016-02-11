@@ -28,7 +28,7 @@ describe NeuralNetwork::Neuron do
       connection2 = NeuralNetwork::Connection.new(neuronB, nil)
       neuron.incoming = [connection1, connection2]
       neuron.activate
-      expect(0.5..1).to cover(neuron.output)
+      expect(neuron.output).to eq 0.9426758241011313
     end
   end
 
