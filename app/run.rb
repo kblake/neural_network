@@ -53,27 +53,33 @@ require_relative '../lib/neural_network'
 #####################################################
 #puts
 #puts "*" * 80
-#puts "NETWORK"
-#net = NeuralNetwork::Network.new([3,2,1])
-#net.activate([1,2, 3])
+puts "NETWORK"
+net = NeuralNetwork::Network.new([3,2,1])
+net.activate([1,2, 3])
 
-#puts "INPUT"
-#net.input_layer.neurons.each do |n|
-  #puts "in #{n.input}  out #{n.output}"
-#end
+puts "INPUT"
+net.input_layer.neurons.each do |n|
+  puts "in #{n.input}  out #{n.output}"
+end
 
 
-#puts "HIDDEN"
-#net.hidden_layers.each do |l|
-  #l.neurons.each do |n|
-    #puts "in #{n.input}  out #{n.output}"
-  #end
-#end
+puts "HIDDEN"
+net.hidden_layers.each do |l|
+  l.neurons.each do |n|
+    puts "in #{n.input}  out #{n.output}"
+  end
+end
 
-#puts "OUTPUT"
-#net.output_layer.neurons.each do |n|
-  #puts "in #{n.input}  out #{n.output}"
-#end
+puts "OUTPUT"
+net.output_layer.neurons.each do |n|
+  puts "in #{n.input}  out #{n.output}"
+end
+
+puts
+puts "********************************************************"
+puts "********************************************************"
+puts
+
 
 
 neuronA = NeuralNetwork::Neuron.new
@@ -81,19 +87,24 @@ neuronB = NeuralNetwork::Neuron.new
 
 neuronA.connect(neuronB)
 
-10000.times do |n|
+# puts neuronB.incoming.first.source.output
+# puts neuronB.incoming.first.weight
+
+10001.times do |n|
   neuronA.activate(2)
   neuronB.activate
 
-  #puts "A out: #{neuronA.output}"
-  #puts "B out: #{neuronB.output}"
+  # puts "A out: #{neuronA.output}"
+  # puts "B out: #{neuronB.output}"
 
   neuronB.train(1)
   neuronA.train
 
   if n == 0 || n % 1000 == 0
+    # puts "A out: #{neuronA.output}"
+    # puts "B out: #{neuronB.output}"
     puts "epoch: #{n} error: #{neuronB.error}"
   end
-  #puts "A error/delta: #{neuronA.error}/#{neuronA.delta}"
-  #puts "B error/delta: #{neuronB.error}/#{neuronB.delta}"
+  # puts "A error/delta: #{neuronA.error}/#{neuronA.delta}"
+  # puts "B error/delta: #{neuronB.error}/#{neuronB.delta}"
 end

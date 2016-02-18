@@ -69,7 +69,9 @@ describe NeuralNetwork::Neuron do
         neuronB.train(1)
         neuronA.train
 
+        # error gets smaller
         expect(neuronB.error < old_error).to be_truthy
+        old_error = neuronB.error
       end
 
     end
